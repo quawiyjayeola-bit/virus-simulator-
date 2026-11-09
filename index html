@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CYBER VIRUS LAB</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  background: #000;
+  color: #00ff41;
+  font-family: monospace;
+  padding: 20px;
+}
+h1 {
+  text-align: center;
+  text-shadow: 0 0 15px #00ff41;
+}
+.box {
+  border: 1px solid #00ff41;
+  padding: 15px;
+  margin-top: 20px;
+  box-shadow: 0 0 10px #00ff41;
+}
+button {
+  background: #00ff41;
+  color: black;
+  padding: 14px;
+  border: none;
+  font-weight: bold;
+  width: 100%;
+  margin-top: 15px;
+}
+#terminal {
+  height: 220px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}
+.bar {
+  background: #222;
+  height: 15px;
+}
+#progress {
+  background: #00ff41;
+  width: 0%;
+  height: 15px;
+}
+</style>
+</head>
+<body>
+
+<h1>☣ CYBER VIRUS LAB ☣</h1>
+
+<div class="box">
+<h3>SIMULATED SYSTEM STATUS</h3>
+<p>Status: <span id="status">STANDBY</span></p>
+<p>Threat level: <span id="threat">0%</span></p>
+<div class="bar"><div id="progress"></div></div>
+<button onclick="scan()">START SIMULATION</button>
+<button onclick="reset()">RESET LAB</button>
+</div>
+
+<div class="box">
+<h3>LIVE TERMINAL</h3>
+<div id="terminal">CYBER LAB v1.0
+System ready...
+Waiting for command...
+</div>
+</div>
+
+<script>
+let running = false;
+
+function log(message) {
+ let terminal = document.getElementById("terminal");
+ terminal.innerHTML += "\n> " + message;
+ terminal.scrollTop = terminal.scrollHeight;
+}
+
+function scan() {
+ if(running) return;
+ running = true;
+
+ let progress = 0;
+ let messages = [
+ "Initializing simulation...",
+ "Scanning virtual directories...",
+ "Checking simulated files...",
+ "Testing security systems...",
+ "Simulated threat detected!",
+ "Running harmless virus demonstration...",
+ "Simulation completed!"
+ ];
+
+ document.getElementById("status").innerText = "SCANNING";
+
+ let timer = setInterval(() => {
+   progress += 10;
+   document.getElementById("progress").style.width = progress + "%";
+   document.getElementById("threat").innerText = progress + "%";
+
+   log(messages[progress/10 - 1]);
+
+   if(progress >= 100) {
+     clearInterval(timer);
+     document.getElementById("status").innerText = "SIMULATION COMPLETE";
+     log("No real files were changed.");
+     running = false;
+   }
+ }, 800);
+}
+
+function reset() {
+ if(running) return;
+ document.getElementById("progress").style.width = "0%";
+ document.getElementById("threat").innerText = "0%";
+ document.getElementById("status").innerText = "STANDBY";
+ document.getElementById("terminal").innerHTML = "CYBER LAB RESET\nWaiting for command...";
+}
+</script>
+
+</body>
+</html>
